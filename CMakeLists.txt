@@ -1,9 +1,12 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.20)
 
-project(CPP-STARTER-PROJECT
+project(CPP_STARTER_PROJECT
         VERSION 0.1.0
-        DESCRIPTION "CPP-STARTER-PROJECT description"
+        DESCRIPTION "CPP_STARTER_PROJECT description"
         LANGUAGES CXX)
+
+# Add our CMake modules
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 # Dependencies
 add_subdirectory(external/fmt)
@@ -23,3 +26,10 @@ target_link_libraries(cpp_starter_exe PRIVATE cpp_starter_lib)
 
 add_library(cpp_starter::lib ALIAS cpp_starter_lib)
 add_executable(cpp_starter ALIAS cpp_starter_exe)
+
+# Enable/disable tests
+option(CPP_STARTER_BUILD_TESTS "Build tests for cpp-starter" OFF)
+if (CPP_STARTER_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
