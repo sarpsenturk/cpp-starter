@@ -1,4 +1,9 @@
-int main()
+#include "cpp-starter/cpp-starter.h"
+
+#include <fmt/core.h>
+
+int main(int argc, const char* argv[])
 {
-	return 0;
+    fmt::print("Hello world\n");
+    return cpp_starter::return_ok();
 }

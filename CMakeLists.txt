@@ -1,6 +1,25 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.14)
 
-project(PROJECT_NAME)
+project(CPP-STARTER-PROJECT
+        VERSION 0.1.0
+        DESCRIPTION "CPP-STARTER-PROJECT description"
+        LANGUAGES CXX)
 
-add_executable(executable_name src/main.cpp)
-target_compile_features(executable_name PUBLIC cxx_std_20)
+# Dependencies
+add_subdirectory(external/fmt)
+
+# Application library
+add_library(cpp_starter_lib STATIC "")
+target_compile_features(cpp_starter_lib PUBLIC cxx_std_20)
+target_include_directories(cpp_starter_lib PUBLIC include/)
+target_link_libraries(cpp_starter_lib PUBLIC fmt::fmt)
+
+add_subdirectory(include/cpp-starter)
+add_subdirectory(src)
+
+# Application executable
+add_executable(cpp_starter_exe src/main.cpp)
+target_link_libraries(cpp_starter_exe PRIVATE cpp_starter_lib)
+
+add_library(cpp_starter::lib ALIAS cpp_starter_lib)
+add_executable(cpp_starter ALIAS cpp_starter_exe)
