@@ -12,12 +12,13 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 find_package(FMT REQUIRED)
 
 # Application library
-add_library(cpp_starter_lib STATIC "")
+add_library(cpp_starter_lib STATIC " ")
 target_compile_features(cpp_starter_lib PUBLIC cxx_std_20)
 target_include_directories(cpp_starter_lib PUBLIC include/)
 target_link_libraries(cpp_starter_lib PUBLIC fmt::fmt)
 
-add_subdirectory(include/cpp-starter)
+# Source directories
+add_subdirectory(include)
 add_subdirectory(src)
 
 # Application executable
@@ -28,8 +29,8 @@ add_library(cpp_starter::lib ALIAS cpp_starter_lib)
 add_executable(cpp_starter ALIAS cpp_starter_exe)
 
 # Enable/disable tests
-option(CPP_STARTER_BUILD_TESTS "Build tests for cpp-starter" OFF)
+option(CPP_STARTER_BUILD_TESTS "Build tests for cpp_starter" OFF)
 if (CPP_STARTER_BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)
-endif()
+endif ()
