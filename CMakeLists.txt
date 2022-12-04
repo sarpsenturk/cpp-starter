@@ -9,7 +9,7 @@ project(CPP_STARTER_PROJECT
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 # Dependencies
-add_subdirectory(external/fmt)
+find_package(FMT REQUIRED)
 
 # Application library
 add_library(cpp_starter_lib STATIC "")
